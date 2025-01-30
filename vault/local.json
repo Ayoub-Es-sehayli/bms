@@ -1,0 +1,15 @@
+ui = true
+
+api_address = "https://vault:8200"
+disable_mlock = true
+
+storage "file" {
+    path = "/vault/file"
+}
+
+listener "tcp" {
+    address = "vault:8200"
+    tls_cert_file = "/vault/config/vault.crt"
+    tls_key_file = "/vault/config/vault.key"
+    tls_client_ca_file = "/vault/config/ca.crt"
+}
