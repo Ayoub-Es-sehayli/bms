@@ -11,6 +11,24 @@ services:
     volumes:
       - vault:/vault/file
       - ./vault:/vault/config
+  server:
+    depends_on:
+      - vault
+    image: dev/bms-server:$SERVER_VERSION
+    build:
+      context: ./bms-server
+      no_cache: true
+      args:
+        VERSION: $SERVER_VERSION
+    volumes:
+      - ./certs:/bms/certs
+      - ./logs:/bms/logs
+    environment:
+      - CERTS_DIR=/bms/certs/server
+      - SSL_CERT_PATH=server.crt
+      - SSL_KEY_PATH=server.key
+      - SSL_CA_PATH=ca.crt
+    env_file: .env.server.docker
 
 volumes:
   vault:
