@@ -7,8 +7,9 @@ from requests import Response
 
 logger = logging.getLogger("bms")
 now = datetime.datetime.now()
+logger.setLevel(logging.INFO)
 logger.addHandler(logging.FileHandler(
-    os.path.join('/bms', 'logs', f"logs_{now.strftime('%y-%M-%dT%H:%m:%s')}.log")))
+    os.path.join('/bms', 'logs', f"logs_{now.strftime('%Y-%m-%dT%H:%M:%S')}.log")))
 
 def setup_app():
     CERTS_DIR=os.environ.get("CERTS_DIR", "/bms/certs")
@@ -58,5 +59,6 @@ def setup_app():
 if __name__ == '__main__':
     try:
         setup_app()
+        print('Setup done!')
     except Exception as err:
         logger.error(err)
