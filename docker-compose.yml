@@ -11,7 +11,7 @@ services:
     volumes:
       - vault:/vault/file
       - ./vault:/vault/config
-  server:
+  api.bms:
     depends_on:
       - vault
     image: dev/bms-server:$SERVER_VERSION
