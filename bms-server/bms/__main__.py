@@ -27,6 +27,7 @@ def setup_app():
         # verify=verify_cert_path
         verify=False
     )
+    del os.environ["VAULT_TOKEN"]
 
     if client.sys.is_sealed() or not client.sys.is_initialized():
         raise Exception("Vault not running or sealed, please unseal the vault.")
@@ -49,6 +50,7 @@ def setup_app():
 
     result_token = result['wrap_info']['token']
     unwrapped_result = client.sys.unwrap(result_token)
+    client.logout()
     client.auth.approle.login(ROLE_ID, unwrapped_result['data']['secret_id'])
     if client.is_authenticated():
         logger.info("Server authenticated successfully")
