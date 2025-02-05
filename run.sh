@@ -1,5 +1,8 @@
 #!/bin/fish
 
+# Empty Logs
+rm logs/*
+
 set PROJECT_DIR $PWD
 # Build Server Project
 cd bms-server
