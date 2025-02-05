@@ -1,0 +1,12 @@
+scrape_configs:
+- job_name: bms-api
+  honor_timestamps: true
+  track_timestamps_staleness: false
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  enable_compression: true
+  static_configs:
+  - targets:
+    - api.bms:9000

@@ -40,7 +40,15 @@ services:
       - ./certs/pg/server.crt:/var/lib/postgresql/server.crt
       - ./certs/pg/server.key:/var/lib/postgresql/server.key
     env_file: .env.pg.docker
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    ports:
+      - 9090:9090
+    volumes:
+      - prometheus:/prometheus
+      - ./prom/config.yml:/etc/prometheus/prometheus.yml
 
 volumes:
+  prometheus:
   vault:
   db:
