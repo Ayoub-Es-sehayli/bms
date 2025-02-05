@@ -5,6 +5,7 @@ COPY dist/ /bms/
 WORKDIR /bms
 
 ARG VERSION
+RUN apk add --update libpq-dev gcc
 RUN pip install bms-$VERSION-py3-none-any.whl
 
 RUN tar -xzf bms-$VERSION.tar.gz
