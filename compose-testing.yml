@@ -1,0 +1,5 @@
+services:
+  api.bms:
+    image: dev/bms-server:${SERVER_VERSION}-test
+    build:
+      target: test-build

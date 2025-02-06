@@ -19,3 +19,8 @@ distribution = true
 
 [tool.pdm.build]
 includes = ["bms/"]
+
+[dependency-groups]
+test = [
+    "pytest>=8.3.4",
+]

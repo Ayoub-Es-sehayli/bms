@@ -18,6 +18,7 @@ services:
     image: dev/bms-server:$SERVER_VERSION
     build:
       context: ./bms-server
+      target: application
       args:
         VERSION: $SERVER_VERSION
     volumes:
