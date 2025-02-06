@@ -9,4 +9,4 @@ scrape_configs:
   enable_compression: true
   static_configs:
   - targets:
-    - api.bms:9000
+    - api.bms:8080

@@ -15,4 +15,4 @@ RUN chown 1000:0 -R bms-$VERSION
 USER 1000
 WORKDIR /bms/bms-$VERSION
 
-CMD ["fastapi", "run", "bms"]
+CMD ["fastapi", "run", "--port", "8080", "bms"]
