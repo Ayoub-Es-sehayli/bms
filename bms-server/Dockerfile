@@ -1,14 +1,20 @@
-FROM python:3.12.8-alpine AS application
+FROM python:3.12.9-alpine AS build
 
-ARG VERSION
 RUN apk add --update libpq-dev gcc
+RUN pip install pdm
 
-COPY dist/ /bms/
-
+COPY . /bms
 WORKDIR /bms
 
-RUN pip install bms-$VERSION-py3-none-any.whl
+RUN pdm build
 
+FROM python:3.12.9-alpine AS application
+
+ARG VERSION
+WORKDIR /bms
+COPY --from=build /bms/dist /bms
+
+RUN pip install bms-$VERSION-py3-none-any.whl
 RUN tar -xzf bms-$VERSION.tar.gz
 RUN chown 1000:0 -R bms-$VERSION
 

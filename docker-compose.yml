@@ -30,6 +30,8 @@ services:
       - SSL_KEY_PATH=server.key
       - SSL_CA_PATH=ca.crt
     env_file: .env.server.docker
+    ports:
+      - 8080:8080
   pg.bms:
     image: postgres:17-alpine
     command: -c ssl=true -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key

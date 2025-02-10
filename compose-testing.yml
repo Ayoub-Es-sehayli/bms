@@ -3,3 +3,7 @@ services:
     image: dev/bms-server:${SERVER_VERSION}-test
     build:
       target: test-build
+    develop:
+      watch:
+      - action: rebuild
+        path: bms-server/
