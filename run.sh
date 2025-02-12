@@ -4,4 +4,7 @@
 rm logs/*
 
 # Run Server Container
-sudo docker compose --env-file .env up --watch --build client.bms
+sudo docker compose \
+    -f docker-compose.yml -f compose-develop.yml \
+    --env-file .env up --watch --build \
+    api.bms client.bms

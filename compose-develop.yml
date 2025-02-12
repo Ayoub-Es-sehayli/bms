@@ -1,0 +1,28 @@
+services:
+  api.bms:
+    image: dev/bms-server:${SERVER_VERSION}-dev
+    build:
+      target: dev
+    develop:
+      watch:
+      - action: rebuild
+        path: bms-server/pyproject.toml
+        target: /bms/pyproject.toml
+      - action: sync
+        path: bms-server/
+        target: /bms
+        ignore:
+          - .venv/
+  client.bms:
+    image: dev/bms-client:${SERVER_VERSION}-dev
+    build:
+      target: dev
+    develop:
+      watch:
+      - action: sync
+        path: bms-client/
+        target: /bms/bms-client
+        ignore:
+          - node_modules/
+      - action: rebuild
+        path: bms-client/package.json

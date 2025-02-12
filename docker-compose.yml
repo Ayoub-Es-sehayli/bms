@@ -18,7 +18,7 @@ services:
     image: dev/bms-server:$SERVER_VERSION
     build:
       context: ./bms-server
-      target: application
+      target: production
       args:
         VERSION: $SERVER_VERSION
     volumes:
@@ -31,32 +31,21 @@ services:
       - SSL_CA_PATH=ca.crt
     env_file: .env.server.docker
     ports:
-      - 8081:8080
+      - 8081:80
   client.bms:
     depends_on:
       - api.bms
     image: dev/bms-client:$SERVER_VERSION
     restart: unless-stopped
-    develop:
-      watch:
-      - action: sync
-        path: bms-client/
-        target: /bms/bms-client
-        ignore:
-          - node_modules/
-      - action: rebuild
-        path: bms-client/package.json
     build:
       context: ./bms-client
-      target: $MODE
+      target: production
       args:
         VERSION: $SERVER_VERSION
     environment:
-      - CLIENT_PORT=8080
+      - CLIENT_PORT=80
     ports:
-      - 8080:8080
-    volumes:
-      - ./bms-client:/bms/bms-client
+      - 8080:80
   pg.bms:
     image: postgres:17-alpine
     command: -c ssl=true -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
