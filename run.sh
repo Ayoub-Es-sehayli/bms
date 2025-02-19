@@ -1,10 +1,7 @@
 #!/bin/fish
 
-# Empty Logs
-rm logs/*
-
 # Run Server Container
 sudo docker compose \
-    -f docker-compose.yml -f compose-develop.yml \
-    --env-file .env up --watch --build \
-    api.bms client.bms
+  -f docker-compose.yml -f compose-develop.yml \
+  --env-file .env up --watch --build \
+  api.bms client.bms

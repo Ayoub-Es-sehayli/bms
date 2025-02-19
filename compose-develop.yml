@@ -8,7 +8,7 @@ services:
       - action: rebuild
         path: bms-server/pyproject.toml
         target: /bms/pyproject.toml
-      - action: sync
+      - action: sync+restart
         path: bms-server/
         target: /bms
         ignore:
